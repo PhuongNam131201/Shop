@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="linkColor">#4285F4</color>
+    <color name="buttonColor">#3B82F6</color>
+    <color name="backgroundGradientStart">#4A00E0</color>
+    <color name="backgroundGradientEnd">#8E2DE2</color>
+    <color name="primary">#747474</color>
+    <color name="grey">#747474</color>
+    <color name="orange">#ff652f</color>
+    <color name="yellow">#ffe400</color>
+    <color name="green">#14a76c</color>
+    <color name="blue">#459DE4</color>
+    <color name="red">#FF0000</color>
+</resources>
