@@ -1,0 +1,11 @@
+<!-- res/drawable/bg_skill_library.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Màu nền nhạt cho Thư viện kỹ năng -->
+    <solid android:color="#F0F4FF" /> <!-- Màu nền nhạt, thay đổi mã màu theo nhu cầu -->
+
+    <!-- Bo tròn các góc của nền -->
+    <corners android:radius="16dp" /> <!-- Độ bo tròn của nền, có thể thay đổi -->
+
+    <!-- Hiệu ứng bóng -->
+    <padding android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp" />
+</shape>

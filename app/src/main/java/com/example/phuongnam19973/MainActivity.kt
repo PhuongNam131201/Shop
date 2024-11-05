@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
         // Khởi tạo FirebaseAuth
         mAuth = FirebaseAuth.getInstance()
@@ -36,37 +37,37 @@ class MainActivity : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // Tìm TextView để hiển thị tên người dùng
-        val textView = findViewById<TextView>(R.id.name)
-
-        // Lấy thông tin người dùng từ Firebase Authentication
-        val auth = Firebase.auth
-        val user = auth.currentUser
-
-        // Kiểm tra nếu người dùng đã đăng nhập
-        if (user != null) {
-            val userName = user.displayName // Lấy tên người dùng
-            textView.text = "Xin chào, " + userName // Hiển thị tên người dùng
-        } else {
-            // Trường hợp người dùng chưa đăng nhập
-            // Có thể xử lý logic khác nếu cần
-        }
+//        val textView = findViewById<TextView>(R.id.name)
+//
+//        // Lấy thông tin người dùng từ Firebase Authentication
+//        val auth = Firebase.auth
+//        val user = auth.currentUser
+//
+//        // Kiểm tra nếu người dùng đã đăng nhập
+//        if (user != null) {
+//            val userName = user.displayName // Lấy tên người dùng
+//            textView.text = "Xin chào, " + userName // Hiển thị tên người dùng
+//        } else {
+//            // Trường hợp người dùng chưa đăng nhập
+//            // Có thể xử lý logic khác nếu cần
+//        }
 
         // Tìm Button để đăng xuất và thêm sự kiện cho nó
-        val sign_out_button = findViewById<Button>(R.id.logout_button)
+        val sign_out_button = findViewById<Button>(R.id.btnFindPartner)
         sign_out_button.setOnClickListener {
             signOutAndStartSignInActivity() // Gọi hàm đăng xuất và chuyển đến màn hình đăng nhập
         }
-        // Lấy thông tin người dùng từ Firebase Authentication
-        val usera = FirebaseAuth.getInstance().currentUser
-
-        // Kiểm tra nếu người dùng đã đăng nhập
-        if (usera != null) {
-            val userName = usera.displayName ?: "Người dùng"
-            val userEmail = usera.email ?: "Email không xác định"
-            textView.text = "Xin chào, $userName\nEmail: $userEmail" // Hiển thị tên và email người dùng
-        } else {
-            textView.text = "Bạn chưa đăng nhập"
-        }
+//        // Lấy thông tin người dùng từ Firebase Authentication
+//        val usera = FirebaseAuth.getInstance().currentUser
+//
+//        // Kiểm tra nếu người dùng đã đăng nhập
+//        if (usera != null) {
+//            val userName = usera.displayName ?: "Người dùng"
+//            val userEmail = usera.email ?: "Email không xác định"
+//            textView.text = "Xin chào, $userName" // Hiển thị tên và email người dùng
+//        } else {
+//            textView.text = "Bạn chưa đăng nhập"
+//        }
 
     }
 

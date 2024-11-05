@@ -8,9 +8,12 @@
     <color name="backgroundGradientEnd">#8E2DE2</color>
     <color name="primary">#747474</color>
     <color name="grey">#747474</color>
-    <color name="orange">#ff652f</color>
+    <color name="orange">#FA8D42</color>
     <color name="yellow">#ffe400</color>
     <color name="green">#14a76c</color>
     <color name="blue">#459DE4</color>
     <color name="red">#FF0000</color>
+    <color name="pink">#EF76AE</color>
+    <color name="pinka">#965DB7</color>
+    <color name="yellow_pastel">#F0F0F0</color>
 </resources>

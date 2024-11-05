@@ -1,0 +1,20 @@
+<!-- res/drawable/ic_listening.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Hình tròn nền -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FFF7E6" /> <!-- Màu nền cho biểu tượng nghe, có thể thay đổi -->
+            <size
+                android:width="48dp"
+                android:height="48dp" /> <!-- Kích thước hình tròn, điều chỉnh nếu cần -->
+        </shape>
+    </item>
+
+    <!-- Biểu tượng nghe ở giữa -->
+    <item>
+        <bitmap
+            android:src="@drawable/info"
+        android:gravity="center" />
+    </item>
+</layer-list>

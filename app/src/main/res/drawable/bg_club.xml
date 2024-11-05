@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hình nền blue.png -->
+    <item>
+        <bitmap
+            android:src="@drawable/blue_gradient"
+            android:tileMode="repeat"
+            android:gravity="center"
+            />
+    </item>
+</layer-list>
