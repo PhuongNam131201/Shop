@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Màu nền nhạt cho trạng thái bình thường -->
+    <solid android:color="#F0F4FF" /> <!-- Màu nền nhạt -->
+    <corners android:radius="16dp" />
+    <padding android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp" />
+</shape>

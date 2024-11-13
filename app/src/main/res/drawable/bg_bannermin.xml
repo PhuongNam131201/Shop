@@ -1,0 +1,13 @@
+<!-- res/drawable/lesson_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Gradient màu nền từ xanh dương sang vàng -->
+    <gradient
+        android:startColor="#4A90E2"
+        android:endColor="#FFC107"
+        android:angle="45" />
+
+    <!-- Độ bo góc cho các cạnh -->
+    <corners android:radius="16dp" />
+</shape>

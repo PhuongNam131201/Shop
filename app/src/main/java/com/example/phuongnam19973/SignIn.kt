@@ -2,7 +2,6 @@ package com.example.phuongnam19973
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,11 +9,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SignIn : AppCompatActivity() {
 
@@ -72,7 +75,6 @@ class SignIn : AppCompatActivity() {
             signInWithEmail(email, password)
         }
 
-
         // Thiết lập nút đăng ký mới
         val btnSignUp = findViewById<TextView>(R.id.txtSignUp)
         btnSignUp.setOnClickListener {
@@ -124,6 +126,10 @@ class SignIn : AppCompatActivity() {
                     // Nếu xác thực thành công
                     val user = auth.currentUser
                     Toast.makeText(this, "Đăng nhập với ${user?.displayName}", Toast.LENGTH_SHORT).show()
+
+                    // Lưu thông tin người dùng vào Firebase Realtime Database
+                    saveUserDataToDatabase(user)
+
                     // Chuyển đến MainActivity
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
@@ -133,6 +139,35 @@ class SignIn : AppCompatActivity() {
                 }
             }
     }
+
+    private fun saveUserDataToDatabase(user: FirebaseUser?) {
+        if (user != null) {
+            // Lấy thông tin người dùng
+            val userId = user.uid
+            val userName = user.displayName
+            val userEmail = user.email
+
+            // Khởi tạo đối tượng Firebase Realtime Database
+            val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+            val userRef = database.child("users").child(userId)
+
+            // Lưu thông tin người dùng vào Firebase Realtime Database
+            val userMap = HashMap<String, Any>()
+            userMap["name"] = userName ?: ""
+            userMap["email"] = userEmail ?: ""
+            userMap["role"] = "user" // Thêm role và mặc định là "user"
+
+            userRef.setValue(userMap)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(this, "Thông tin người dùng đã được lưu", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Lỗi khi lưu thông tin", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+    }
+
 
     private fun signInWithEmail(email: String, password: String) {
         // Gọi hàm đăng nhập bằng email và mật khẩu

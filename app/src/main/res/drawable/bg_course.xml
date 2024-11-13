@@ -1,8 +1,0 @@
-<!-- res/drawable/bg_course.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Màu nền cho khóa học -->
-    <solid android:color="#E0F7FA" /> <!-- Màu nền (có thể thay đổi mã màu tùy thích) -->
-
-    <!-- Bo tròn các góc -->
-    <corners android:radius="16dp" /> <!-- Độ bo tròn, bạn có thể thay đổi giá trị này -->
-</shape>

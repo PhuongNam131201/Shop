@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/backgroundGradientEnd"/>
-    <corners android:radius="24dp"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Khi nhấn vào Button -->
+    <item android:drawable="@drawable/button_bg_pressed" android:state_pressed="true"/>
+
+    <!-- Khi Button ở trạng thái bình thường -->
+    <item android:drawable="@drawable/button_bg_normal"/>
+</selector>

@@ -1,10 +1,19 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Hình nền blue.png -->
+
+    <!-- Shape nền với các góc bo tròn -->
     <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" /> <!-- Nền trắng -->
+            <corners android:radius="16dp" /> <!-- Bo tròn 4 góc với bán kính 16dp -->
+        </shape>
+    </item>
+
+    <!-- Hình nền với lớp nền bo tròn -->
+    <item android:top="2dp" android:bottom="2dp" android:left="2dp" android:right="2dp">
         <bitmap
             android:src="@drawable/blue_gradient"
-            android:tileMode="repeat"
             android:gravity="center"
-            />
+            android:tileMode="repeat" />
     </item>
+
 </layer-list>

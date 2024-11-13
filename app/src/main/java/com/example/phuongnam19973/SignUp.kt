@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 class SignUp : AppCompatActivity() {
 
     private lateinit var edtName: EditText
@@ -119,23 +120,48 @@ class SignUp : AppCompatActivity() {
         }
     }
 
+
+
+    // Bổ sung biến Firestore
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference // Khởi tạo database reference
+
     private fun signUpWithEmail(email: String, password: String, name: String, phone: String) {
-        // Thực hiện đăng ký (sử dụng Firebase Authentication)
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Đăng ký thành công
-                    showMessage("Đăng ký thành công")
-                    // Chuyển đến trang chính (MainActivity)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish() // Đóng activity hiện tại
+                    val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+                    // Tạo đối tượng người dùng với thêm thuộc tính "role"
+                    val user = hashMapOf(
+                        "name" to name,
+                        "phone" to phone,
+                        "email" to email,
+                        "role" to "user"  // Thêm thuộc tính role và gán giá trị mặc định là "user"
+                    )
+
+                    // Lưu thông tin vào Realtime Database
+                    userId?.let {
+                        // Sử dụng userId làm key trong Realtime Database
+                        database.child("users").child(it).setValue(user)
+                            .addOnSuccessListener {
+                                showMessage("Đăng ký thành công và đã lưu thông tin vào Realtime Database")
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish() // Đóng activity hiện tại
+                            }
+                            .addOnFailureListener { e ->
+                                showMessage("Đăng ký thành công nhưng lưu thông tin thất bại: ${e.message}")
+                            }
+                    }
                 } else {
                     // Thông báo lỗi
                     showMessage("Đăng ký không thành công: ${task.exception?.message}")
                 }
             }
     }
+
+
 
     private fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
