@@ -51,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,HomeActivity::class.java)
             startActivity(intent)
         }
+        val profile = findViewById<LinearLayout>(R.id.llprofile)
+        profile.setOnClickListener{
+            val intent = Intent(this,ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Hàm để đăng xuất người dùng và chuyển đến màn hình SignIn

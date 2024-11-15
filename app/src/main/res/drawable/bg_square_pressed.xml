@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#B2EBF2" /> <!-- Màu nền khi nhấn -->
+    <solid android:color="@color/blueskyb" /> <!-- Màu nền khi nhấn -->
     <corners android:radius="16dp" /> <!-- Độ bo tròn -->
 </shape>

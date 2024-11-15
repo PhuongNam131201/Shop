@@ -131,27 +131,34 @@ class SignUp : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Đăng ký thành công
                     val userId = FirebaseAuth.getInstance().currentUser?.uid
+                    val currentUser = FirebaseAuth.getInstance().currentUser
 
-                    // Tạo đối tượng người dùng với thêm thuộc tính "role"
+                    // Gửi email xác nhận
+                    currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener { emailTask ->
+                            if (emailTask.isSuccessful) {
+                                showMessage("Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.")
+                            } else {
+                                showMessage("Không thể gửi email xác nhận: ${emailTask.exception?.message}")
+                            }
+                        }
+
+                    // Tạo đối tượng người dùng
                     val user = hashMapOf(
                         "name" to name,
                         "phone" to phone,
                         "email" to email,
-                        "role" to "user"  // Thêm thuộc tính role và gán giá trị mặc định là "user"
+                        "role" to "user"  // Vai trò mặc định là "user"
                     )
 
                     // Lưu thông tin vào Realtime Database
                     userId?.let {
-                        // Sử dụng userId làm key trong Realtime Database
                         database.child("users").child(it).setValue(user)
                             .addOnSuccessListener {
-                                showMessage("Đăng ký thành công và đã lưu thông tin vào Realtime Database")
-                                val intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
-                                finish() // Đóng activity hiện tại
+                                showMessage("Thông tin đã được lưu vào Realtime Database")
                             }
                             .addOnFailureListener { e ->
-                                showMessage("Đăng ký thành công nhưng lưu thông tin thất bại: ${e.message}")
+                                showMessage("Lưu thông tin thất bại: ${e.message}")
                             }
                     }
                 } else {
@@ -160,6 +167,7 @@ class SignUp : AppCompatActivity() {
                 }
             }
     }
+
 
 
 

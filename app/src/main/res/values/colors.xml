@@ -16,6 +16,8 @@
     <color name="pink">#EF76AE</color>
     <color name="pinka">#965DB7</color>
     <color name="yellow_pastel">#F0F0F0</color>
-    <color name="backgroundb">#151522</color>
+    <color name="backgroundb">#1C1C1C</color>
     <color name="backgrounda">#0e1c3e</color>
+    <color name="blueskya">#E0F7FA</color>
+    <color name="blueskyb">#B2EBF2</color>
 </resources>

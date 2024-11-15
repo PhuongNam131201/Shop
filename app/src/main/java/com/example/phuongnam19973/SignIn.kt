@@ -54,7 +54,7 @@ class SignIn : AppCompatActivity() {
         val btnSignInEmail = findViewById<Button>(R.id.btnSignIn)
         val edtEmail = findViewById<EditText>(R.id.editSignInEmail)
         val edtPassword = findViewById<EditText>(R.id.editSignInPass)
-
+        val forgotpass = findViewById<TextView>(R.id.txtForgotPass)
         btnSignInEmail.setOnClickListener {
             // Lấy email và mật khẩu từ các ô nhập
             val email = edtEmail.text.toString().trim()
@@ -80,6 +80,10 @@ class SignIn : AppCompatActivity() {
         btnSignUp.setOnClickListener {
             // Khi nhấn vào nút, chuyển đến activity đăng ký
             val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+        }
+        forgotpass.setOnClickListener{
+            val intent = Intent(this, ForgotAcivity::class.java)
             startActivity(intent)
         }
     }
