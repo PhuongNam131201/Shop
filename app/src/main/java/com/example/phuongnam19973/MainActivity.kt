@@ -15,60 +15,122 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import com.google.firebase.database.*
+
 class MainActivity : AppCompatActivity() {
 
-    // Biến để quản lý Google Sign-In
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    // Biến để quản lý xác thực Firebase
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Khởi tạo FirebaseAuth
+        // Khởi tạo FirebaseAuth và Database
         mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
-        // Thiết lập cấu hình Google Sign-In
+        // Cấu hình Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // ID client để nhận token
-            .requestEmail() // Yêu cầu email của người dùng
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
             .build()
-
-        // Khởi tạo GoogleSignInClient với cấu hình trên
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        // Kiểm tra quyền của người dùng
+        checkUserRole()
 
-        // Tìm Button để đăng xuất và thêm sự kiện cho nó
-        val sign_out_button = findViewById<Button>(R.id.btnThongTinCuaHang)
-        sign_out_button.setOnClickListener {
-            signOutAndStartSignInActivity() // Gọi hàm đăng xuất và chuyển đến màn hình đăng nhập
+        // Đăng xuất
+        val signOutButton = findViewById<Button>(R.id.btnThongTinCuaHang)
+        signOutButton.setOnClickListener {
+            signOutAndStartSignInActivity()
         }
 
+        // Chuyển đến các màn hình khác
         val buy = findViewById<LinearLayout>(R.id.llBuy)
-        buy.setOnClickListener{
-            val intent = Intent(this,HomeActivity::class.java)
+        buy.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
         val profile = findViewById<LinearLayout>(R.id.llprofile)
-        profile.setOnClickListener{
-            val intent = Intent(this,ProfileActivity::class.java)
+        profile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
 
-    // Hàm để đăng xuất người dùng và chuyển đến màn hình SignIn
-    private fun signOutAndStartSignInActivity() {
-        mAuth.signOut() // Đăng xuất khỏi Firebase
+    // Hàm kiểm tra quyền của người dùng từ Firebase Realtime Database
+    private fun checkUserRole() {
+        val currentUser = mAuth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            database.child("users").child(uid).child("role").addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val role = snapshot.getValue(String::class.java)
+                    when (role) {
+                        "admin" -> {
+                            enableAdminFeatures()
+                        }
+                        "user" -> {
+                            disableAdminFeatures()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Không xác định được quyền của bạn!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
 
-        // Đăng xuất khỏi Google Sign-In
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Firebase", "Lỗi khi lấy dữ liệu role: ${error.message}")
+                }
+            })
+        } else {
+            Log.e("FirebaseAuth", "Người dùng chưa đăng nhập!")
+        }
+    }
+
+    // Kích hoạt các tính năng cho admin
+    private fun enableAdminFeatures() {
+        findViewById<LinearLayout>(R.id.llBuy).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llCart).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llReport).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llCardUser).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llUserProduct).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llVoucherUser).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.bottomCart).visibility = View.GONE
+        Toast.makeText(this, "Chào mừng admin!", Toast.LENGTH_SHORT).show()
+    }
+
+    // Vô hiệu hóa các tính năng chỉ dành cho admin
+    private fun disableAdminFeatures() {
+        findViewById<LinearLayout>(R.id.llManger).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llSquare).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llStatistics).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llVoucher).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llCard).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.llReview).visibility = View.GONE
+        findViewById<LinearLayout>(R.id.bottomManager).visibility = View.GONE
+        Toast.makeText(this, "Chào mừng người dùng!", Toast.LENGTH_SHORT).show()
+    }
+
+    // Đăng xuất người dùng
+    private fun signOutAndStartSignInActivity() {
+        mAuth.signOut()
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // Sau khi đăng xuất thành công, chuyển đến màn hình SignIn
             val intent = Intent(this@MainActivity, SignIn::class.java)
             startActivity(intent)
-            finish() // Kết thúc MainActivity
+            finish()
         }
     }
-
 }
