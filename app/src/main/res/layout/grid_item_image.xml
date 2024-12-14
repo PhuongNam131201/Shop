@@ -1,0 +1,30 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:radius="4dp"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile"
+            android:contentDescription="aa" />
+
+        <!-- Nút xóa -->
+        <ImageButton
+            android:id="@+id/btnDeleteImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/setting"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="Delete" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewRecommendation"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:layout_margin="5dp"
+    android:background="@color/white"
+    app:layout_constraintDimensionRatio="H,1:1">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        />
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Tên SP"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgProduct"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/txtProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Noi dung"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtProductName"
+        />
+    <ImageView
+        android:id="@+id/btnEdit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/editing"
+        app:layout_constraintTop_toBottomOf="@id/txtProductPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/delete"
+        app:layout_constraintTop_toBottomOf="@id/txtProductPrice"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

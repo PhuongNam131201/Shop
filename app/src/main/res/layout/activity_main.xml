@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,58 +16,10 @@
         android:layout_gravity="center_horizontal">
 
         <!-- Banner -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_sky"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"
-            >
-
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NamShop"
-                android:textSize="24sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvClubDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtTitle"
-                android:text="Cung cấp linh kiện điện tử chính hãng"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="8dp" />
-
-            <Button
-                android:id="@+id/btnThongTinCuaHang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="Thông tin về cửa hàng"
-                android:textColor="@android:color/holo_blue_bright"
-                android:backgroundTint="@color/white"
-                android:layout_marginTop="16dp" />
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/motherboard"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"/>
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/smartphones"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="50dp"/>
-
-        </RelativeLayout>
+       <include
+           android:id="@+id/BannerInclude"
+           layout="@layout/banner_main"
+           />
 
         <!-- Tac vu -->
         <TextView
@@ -123,13 +76,13 @@
                 android:id="@+id/llChat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/bg_square"
-                android:padding="16dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_square"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -139,18 +92,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Chat"
-                    android:textSize="16sp"
                     android:textColor="@color/primary"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nhắn tin tư vấn"
-                    android:textSize="14sp"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
         <!-- mua hang, gio hang-->
@@ -620,298 +573,30 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp" />
         <!-- lịch sửa chữa -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_utilitybar"
-            android:padding="16dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/timetable" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đặt lịch sửa chữa"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chọn thời gian bạn có thể nhận dịch vụ"
-                android:textSize="14sp"
-                android:textColor="@color/primary" />
-        </LinearLayout>
+        <include
+            android:id="@+id/shecduleInclude"
+            layout="@layout/schedule_setting"
+            />
         <!-- địa chỉ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_utilitybar"
-            android:padding="16dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/address" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa chỉ"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nhập địa chỉ để tiện liên lạc"
-                android:textSize="14sp"
-                android:textColor="@color/primary" />
-        </LinearLayout>
+        <include
+            android:id="@+id/addressInclude"
+            layout="@layout/address"
+            />
         <!-- cai dat -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_utilitybar"
-            android:padding="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="25dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/setting" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cài đặt"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cài đặt giao diện, thông tin cá nhân"
-                android:textSize="14sp"
-                android:textColor="@color/primary" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="50dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nếu bạn cần trợ giúp chi tiết xin vui lòng liên hệ:"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_gravity="center"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sdt: *********"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email abc@gmail.com"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="------------------***********------------------"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ứng dụng được tạo bởi PhuongNam"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:layout_gravity="center"
-                />
-        </LinearLayout>
+        <include
+            android:id="@+id/settingInclude"
+            layout="@layout/setting_bg"
+            />
+        <include
+            android:id="@+id/otherInclude"
+            layout="@layout/other"
+            />
     </LinearLayout>
 </ScrollView>
-    <LinearLayout
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:background="@drawable/card_bg_home"
+    <!-- Bottom Navigation -->
+    <include
+        android:id="@+id/bottomNavigationInclude"
+        layout="@layout/bottom_navigation_main"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-
-        >
-
-    <!-- Icons in Bottom Navigation -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="5dp"
-        android:background="@drawable/background_selector"
-        android:clickable="true"
-        android:focusable="true"
-      >
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/home"
-            />
-
-        <TextView
-            android:layout_marginTop="-20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trang chủ"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="5dp"
-        android:background="@drawable/background_selector"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/userhome" />
-        <TextView
-            android:layout_marginTop="-20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thông tin"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bottomCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="-10dp"
-        android:background="@drawable/background_selector"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/cart_shop" />
-        <TextView
-            android:layout_marginTop="-20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Giỏ hàng"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-        <LinearLayout
-            android:id="@+id/bottomManager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            android:layout_marginTop="-10dp"
-            android:background="@drawable/background_selector"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="16dp"
-                android:src="@drawable/list" />
-            <TextView
-                android:layout_marginTop="-20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quản lý"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="5dp"
-        android:background="@drawable/background_selector"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/chathome" />
-        <TextView
-            android:layout_marginTop="-20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tin nhắn"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="5dp"
-        android:background="@drawable/background_selector"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/settinghome" />
-        <TextView
-            android:layout_marginTop="-20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cài đặt"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-</LinearLayout>
+        tools:ignore="IncludeLayoutParam" />
 </RelativeLayout>

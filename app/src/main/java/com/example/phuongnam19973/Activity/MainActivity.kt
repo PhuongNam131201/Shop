@@ -1,23 +1,20 @@
-package com.example.phuongnam19973
+package com.example.phuongnam19973.Activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.phuongnam19973.R
 import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
@@ -61,6 +58,11 @@ class MainActivity : AppCompatActivity() {
         val profile = findViewById<LinearLayout>(R.id.llprofile)
         profile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+        val manage = findViewById<LinearLayout>(R.id.llManger)
+        manage.setOnClickListener{
+            val intent = Intent(this, ManageActivity::class.java)
             startActivity(intent)
         }
     }
@@ -109,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.llUserProduct).visibility = View.GONE
         findViewById<LinearLayout>(R.id.llVoucherUser).visibility = View.GONE
         findViewById<LinearLayout>(R.id.bottomCart).visibility = View.GONE
-        Toast.makeText(this, "Chào mừng admin!", Toast.LENGTH_SHORT).show()
+
     }
 
     // Vô hiệu hóa các tính năng chỉ dành cho admin
@@ -121,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.llCard).visibility = View.GONE
         findViewById<LinearLayout>(R.id.llReview).visibility = View.GONE
         findViewById<LinearLayout>(R.id.bottomManager).visibility = View.GONE
-        Toast.makeText(this, "Chào mừng người dùng!", Toast.LENGTH_SHORT).show()
+
     }
 
     // Đăng xuất người dùng

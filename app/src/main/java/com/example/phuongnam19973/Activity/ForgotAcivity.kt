@@ -1,4 +1,4 @@
-package com.example.phuongnam19973
+package com.example.phuongnam19973.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.phuongnam19973.R
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotAcivity : AppCompatActivity() {
@@ -50,7 +51,7 @@ class ForgotAcivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Đã gửi yêu cầu đặt lại mật khẩu tới email của bạn", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this,SignIn::class.java)
+                    val intent = Intent(this, SignIn::class.java)
                     startActivity(intent)
                 } else {
                     val errorMessage = task.exception?.message

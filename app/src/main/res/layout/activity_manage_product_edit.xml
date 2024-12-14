@@ -1,0 +1,64 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Các EditText và Button -->
+        <EditText
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên sản phẩm"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/etProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả sản phẩm"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/etProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá sản phẩm"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etProductCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phân loại sản phẩm"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btnSelectImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn hình ảnh" />
+
+        <!-- GridView để xem trước ảnh -->
+        <GridView
+            android:id="@+id/gvSelectedImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_background"/>
+
+        <Button
+            android:id="@+id/btnUploadProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm sản phẩm"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

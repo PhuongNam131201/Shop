@@ -4,9 +4,9 @@
 
     <!-- Gradient màu nền từ xanh dương sang vàng -->
     <gradient
-        android:startColor="#4A90E2"
+        android:startColor="#50E3C2"
         android:endColor="#FFC107"
-        android:angle="45" />
+        android:angle="5" />
 
     <!-- Độ bo góc cho các cạnh -->
     <corners android:radius="16dp" />

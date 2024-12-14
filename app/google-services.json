@@ -1,20 +1,21 @@
 {
   "project_info": {
-    "project_number": "292545641748",
-    "project_id": "phuongnam19973",
-    "storage_bucket": "phuongnam19973.appspot.com"
+    "project_number": "835142043417",
+    "firebase_url": "https://qldssp-default-rtdb.firebaseio.com",
+    "project_id": "qldssp",
+    "storage_bucket": "qldssp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:292545641748:android:1d9ae77ec6deb8cecdd601",
+        "mobilesdk_app_id": "1:835142043417:android:9cfadaa8c6767589502788",
         "android_client_info": {
           "package_name": "com.example.phuongnam19973"
         }
       },
       "oauth_client": [
         {
-          "client_id": "292545641748-eau42n3bs7pi39ncr0jag04i0l2duujh.apps.googleusercontent.com",
+          "client_id": "835142043417-hsu20ofsee9oqdpuqr7ispivf5pnt88v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.phuongnam19973",
@@ -22,20 +23,20 @@
           }
         },
         {
-          "client_id": "292545641748-bah7tot8bc460cojen10ti5rqmgs3qa1.apps.googleusercontent.com",
+          "client_id": "835142043417-19bqck7t2l67tbnq7a36gjv4fnee739i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCHvaYV1YbduduidzwymVg8gWLlE8rxwWI"
+          "current_key": "AIzaSyAPKGwdAPKbE23fnjK01VpdUzW5kg2oBu0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "292545641748-bah7tot8bc460cojen10ti5rqmgs3qa1.apps.googleusercontent.com",
+              "client_id": "835142043417-19bqck7t2l67tbnq7a36gjv4fnee739i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
