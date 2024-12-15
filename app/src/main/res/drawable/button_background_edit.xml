@@ -1,0 +1,10 @@
+<!-- res/drawable/button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#14a76c" /> <!-- Màu nền, bạn có thể thay đổi -->
+    <corners android:radius="16dp" /> <!-- Bo góc, có thể thay đổi để bo góc theo ý muốn -->
+    <padding
+        android:left="16dp"
+        android:top="12dp"
+        android:right="16dp"
+        android:bottom="12dp" /> <!-- Thêm khoảng cách bên trong button -->
+</shape>

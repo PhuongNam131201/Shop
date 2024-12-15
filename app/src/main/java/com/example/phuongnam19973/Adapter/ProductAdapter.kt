@@ -1,6 +1,7 @@
 package com.example.phuongnam19973.Adapter
 
 import android.content.Intent
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.phuongnam19973.Activity.ProductDetailActivity
 import com.example.phuongnam19973.Model.Product
 import com.example.phuongnam19973.R
 import com.google.android.material.imageview.ShapeableImageView
@@ -19,6 +21,7 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
         val productImage: ShapeableImageView = itemView.findViewById(R.id.imgProduct)
         val productName: TextView = itemView.findViewById(R.id.txtProductName)
         val productPrice: TextView = itemView.findViewById(R.id.txtProductPrice)
+        val productGiamGia: TextView=itemView.findViewById(R.id.txtGiamGia)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -37,7 +40,8 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
             product.name
         }
         holder.productName.text = truncatedName
-
+        holder.productGiamGia.text = "200.000 đ"
+        holder.productGiamGia.paintFlags = holder.productGiamGia.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         // Đảm bảo price là kiểu Double, sau đó định dạng giá trị
         val formattedPrice = DecimalFormat("###,###").format(product.price)
         holder.productPrice.text = "$formattedPrice ₫"  // Hiển thị giá với dấu phân cách hàng nghìn và đơn vị tiền tệ VND
@@ -56,9 +60,17 @@ class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adap
                 .into(holder.productImage)
         }
 
-        // Cài đặt sự kiện cho các nút sửa và xóa
-
-
+        holder.itemView.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, ProductDetailActivity::class.java)
+            intent.putExtra("productId", product.id)
+            intent.putExtra("productName", product.name)
+            intent.putExtra("productPrice", product.price)
+            intent.putExtra("productCategory", product.category)
+            intent.putExtra("productDescription", product.description) // Nếu bạn có thêm thông tin mô tả
+            intent.putStringArrayListExtra("productImages", ArrayList(product.imageUrl)) // Truyền danh sách URL hình ảnh
+            context.startActivity(intent)
+        }
     }
 
 

@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,27 +21,26 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_height="match_parent">
-
                 <ImageView
                     android:id="@+id/backBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/backblue" />
 
-                <ImageView
-                    android:id="@+id/favBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CHI TIẾT SẢN PHẨM"
+                    app:layout_constraintStart_toStartOf="@id/backBtn"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/atm" />
-
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/slider"
                 android:layout_margin="16dp"
@@ -63,7 +63,7 @@
                 app:layout_constraintHorizontal_bias="0.57"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewPagerSlider"
-                app:selectedDotColor="@color/green"
+                app:selectedDotColor="@color/blue"
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -82,44 +82,85 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/titleTxt"
+                    android:id="@+id/txtNameDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textSize="20dp"
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:text="Noi dung"/>
                 <TextView
-                    android:id="@+id/priceTxt"
+                    android:id="@+id/txtPriceDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:text="$0"
-                    android:textColor="@color/black"
+                    android:layout_marginRight="20dp"
+                    android:text="999999"
+                    android:textColor="@color/red"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 >
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Mô tả"
                     android:textStyle="bold"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+                    android:textSize="18dp"/>
 
+                <TextView
+                    android:id="@+id/txtDescriptionDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mô tả"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingExtra="4dp"
+                    android:scrollbars="vertical"
+                    android:maxLines="10"
+                    android:ellipsize="none"
+                    android:padding="8dp"
+                    android:hyphenationFrequency="none"
+                    android:scrollHorizontally="false"
+                    android:breakStrategy="simple" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/edit"/>
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/delete"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

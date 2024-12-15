@@ -8,7 +8,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Các EditText và Button -->
         <EditText
             android:id="@+id/etProductNamea"
             android:layout_width="match_parent"
@@ -43,7 +42,6 @@
             android:layout_height="wrap_content"
             android:text="Chọn hình ảnh" />
 
-        <!-- GridView để xem trước ảnh -->
         <GridView
             android:id="@+id/gvSelectedImagesa"
             android:layout_width="match_parent"

@@ -34,7 +34,7 @@ class ImageAdapter(private val context: Context, private val imageUris: MutableL
         val gridItemView = inflater.inflate(R.layout.grid_item_image, parent, false)
 
         val imageView: ImageView = gridItemView.findViewById(R.id.imageView)
-        val deleteButton: ImageButton = gridItemView.findViewById(R.id.btnDeleteImage)
+        val deleteButton: ImageView = gridItemView.findViewById(R.id.btnDeleteImage)
 
         // Hiển thị ảnh
         imageView.setImageURI(imageUris[position])

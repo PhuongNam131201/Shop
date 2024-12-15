@@ -18,11 +18,11 @@
             android:contentDescription="aa" />
 
         <!-- Nút xóa -->
-        <ImageButton
+        <ImageView
             android:id="@+id/btnDeleteImage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/setting"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/delete"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:contentDescription="Delete" />

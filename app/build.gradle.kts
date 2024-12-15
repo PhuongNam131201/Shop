@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding =  true
+    }
 }
 
 dependencies {
@@ -61,5 +64,8 @@ dependencies {
     kapt ("com.github.bumptech.glide:compiler:4.15.1")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.google.code.gson:gson:2.9.1")
+    implementation("com.tbuonomo:dotsindicator:5.0")
 }
+
 

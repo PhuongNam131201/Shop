@@ -28,6 +28,10 @@
             android:exported="false"/>
         <activity android:name=".Activity.AddProductActivity"
             android:exported="false"/>
+        <activity android:name=".Activity.ProductDetailActivity"
+            android:exported="false"/>
+        <activity android:name=".Activity.EditProductActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activity.SignIn"
             android:exported="true">

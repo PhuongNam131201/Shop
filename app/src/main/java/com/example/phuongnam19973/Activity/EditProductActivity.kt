@@ -1,70 +1,164 @@
-package com.example.phuongnam19973.Activity
+        package com.example.phuongnam19973.Activity
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.phuongnam19973.Model.Product
-import com.example.phuongnam19973.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+        import android.net.Uri
+        import android.os.Bundle
+        import android.widget.*
+        import androidx.activity.result.contract.ActivityResultContracts
+        import androidx.appcompat.app.AppCompatActivity
+        import com.example.phuongnam19973.R
+        import com.example.phuongnam19973.Model.Product
+        import com.google.firebase.database.FirebaseDatabase
+        import com.google.firebase.database.DataSnapshot
+        import com.google.firebase.database.DatabaseError
+        import com.google.firebase.database.ValueEventListener
+        import com.google.firebase.storage.FirebaseStorage
 
-class EditProductActivity : AppCompatActivity() {
-    private lateinit var databaseReference: DatabaseReference
-    private lateinit var productId: String
+        class EditProductActivity : AppCompatActivity() {
 
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manager_product_edit_a)
+            private lateinit var etProductName: EditText
+            private lateinit var etProductDescription: EditText
+            private lateinit var etProductPrice: EditText
+            private lateinit var etProductCategory: EditText
+            private lateinit var btnSelectImages: Button
+            private lateinit var gvSelectedImages: GridView
+            private lateinit var btnUploadProduct: Button
 
-        productId = intent.getStringExtra("productId") ?: ""
-        databaseReference = FirebaseDatabase.getInstance().getReference("products").child(productId)
+            private var imageUris: MutableList<Uri> = mutableListOf()
+            private lateinit var imageAdapter: ImageAdapter
+            private lateinit var productId: String
 
-        loadProductDetails()
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                setContentView(R.layout.activity_manager_product_edit_a)
 
-        val btnSave = findViewById<Button>(R.id.btnUploadProducta)
-        btnSave.setOnClickListener {
-            saveProductChanges()
-        }
-    }
+                // Ánh xạ các view
+                etProductName = findViewById(R.id.etProductNamea)
+                etProductDescription = findViewById(R.id.etProductDescriptiona)
+                etProductPrice = findViewById(R.id.etProductPricea)
+                etProductCategory = findViewById(R.id.etProductCategorya)
+                btnSelectImages = findViewById(R.id.btnSelectImagesa)
+                gvSelectedImages = findViewById(R.id.gvSelectedImagesa)
+                btnUploadProduct = findViewById(R.id.btnUploadProducta)
 
-    private fun loadProductDetails() {
-        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val product = snapshot.getValue(Product::class.java)
-                product?.let {
-                    // Hiển thị thông tin sản phẩm trên giao diện
+                imageAdapter = ImageAdapter(this, imageUris)
+                gvSelectedImages.adapter = imageAdapter
+
+                // Lấy thông tin sản phẩm từ Intent
+                productId = intent.getStringExtra("productId") ?: ""
+                if (productId.isNotEmpty()) {
+                    loadProductData(productId)
+                }
+
+                // Chọn ảnh mới
+                btnSelectImages.setOnClickListener {
+                    selectImages()
+                }
+
+                // Cập nhật sản phẩm
+                btnUploadProduct.setOnClickListener {
+                    updateProduct()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@EditProductActivity, "Lỗi tải dữ liệu sản phẩm", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+            // Tải dữ liệu sản phẩm và hiển thị ảnh hiện tại
+            private fun loadProductData(productId: String) {
+                val databaseReference = FirebaseDatabase.getInstance().getReference("products").child(productId)
+                databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val product = snapshot.getValue(Product::class.java)
+                        if (product != null) {
+                            // Điền thông tin sản phẩm vào các EditText
+                            etProductName.setText(product.name)
+                            etProductDescription.setText(product.description)
+                            etProductPrice.setText(product.price.toString())
+                            etProductCategory.setText(product.category)
 
-    private fun saveProductChanges() {
-        val updatedProduct = Product(
-            id = productId,
-            name = findViewById<EditText>(R.id.etProductNamea).text.toString(),
-            price = findViewById<EditText>(R.id.etProductPricea).text.toString().toDouble(),
-            imageUrl = listOf() // Cập nhật URL hình ảnh nếu cần
-        )
+                            // Xóa danh sách ảnh hiện tại để tránh bị trùng
+                            imageUris.clear()
 
-        databaseReference.setValue(updatedProduct)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Sản phẩm đã được cập nhật", Toast.LENGTH_SHORT).show()
-                finish()
+                            // Thêm các ảnh hiện có từ Firebase vào danh sách
+                            product.imageUrl?.forEach { imageUrl ->
+                                imageUris.add(Uri.parse(imageUrl)) // Chuyển đổi từ URL sang Uri
+                            }
+
+                            // Cập nhật lại GridView để hiển thị ảnh hiện có
+                            imageAdapter.notifyDataSetChanged()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@EditProductActivity, "Lỗi: ${error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show()
+
+            private val selectImagesLauncher = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+                if (uris.isNotEmpty()) {
+                    imageUris.addAll(uris)  // Thêm ảnh mới vào danh sách
+                    imageAdapter.notifyDataSetChanged()  // Cập nhật GridView
+                    Toast.makeText(this, "Đã chọn ${imageUris.size} hình ảnh", Toast.LENGTH_SHORT).show()
+                }
             }
-    }
-}
+
+            private fun selectImages() {
+                selectImagesLauncher.launch("image/*")
+            }
+
+            private fun updateProduct() {
+                val updatedName = etProductName.text.toString()
+                val updatedDescription = etProductDescription.text.toString()
+                val updatedPrice = etProductPrice.text.toString().toDoubleOrNull() ?: 0.0
+                val updatedCategory = etProductCategory.text.toString()
+
+                if (updatedName.isEmpty() || updatedDescription.isEmpty() || updatedCategory.isEmpty()) {
+                    Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                val databaseReference = FirebaseDatabase.getInstance().getReference("products")
+                val updates = mapOf(
+                    "name" to updatedName,
+                    "description" to updatedDescription,
+                    "price" to updatedPrice,
+                    "category" to updatedCategory
+                )
+
+                databaseReference.child(productId).updateChildren(updates).addOnSuccessListener {
+                    uploadImages(productId)
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Lỗi cập nhật sản phẩm: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            private fun uploadImages(productId: String) {
+                val storageReference = FirebaseStorage.getInstance().reference
+                val imageUrls = mutableListOf<String>()
+                var uploadCount = 0
+
+                for ((index, uri) in imageUris.withIndex()) {
+                    val imageRef = storageReference.child("products/$productId/image_$index.jpg")
+                    imageRef.putFile(uri)
+                        .addOnSuccessListener {
+                            imageRef.downloadUrl.addOnSuccessListener { url ->
+                                imageUrls.add(url.toString())
+                                uploadCount++
+
+                                if (uploadCount == imageUris.size) {
+                                    FirebaseDatabase.getInstance().getReference("products")
+                                        .child(productId)
+                                        .child("imageUrl")
+                                        .setValue(imageUrls)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this, "Cập nhật sản phẩm thành công!", Toast.LENGTH_SHORT).show()
+                                            finish()
+                                        }
+                                }
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Lỗi tải ảnh: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+        }
 

@@ -2,15 +2,13 @@ package com.example.phuongnam19973.Activity
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.phuongnam19973.Model.Product
 import com.example.phuongnam19973.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
 class AddProductActivity : AppCompatActivity() {
@@ -18,10 +16,11 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var etProductName: EditText
     private lateinit var etProductDescription: EditText
     private lateinit var etProductPrice: EditText
-    private lateinit var etProductCategory: EditText
-    private lateinit var btnSelectImages: Button
+    private lateinit var btnSelectImages: ImageView
     private lateinit var btnUploadProduct: Button
     private lateinit var gvSelectedImages: GridView
+    private lateinit var spinnerProductCategory: Spinner
+    private lateinit var iconTypeAdd: ImageView
 
     private var imageUris: MutableList<Uri> = mutableListOf()
     private lateinit var imageAdapter: ImageAdapter
@@ -30,13 +29,15 @@ class AddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_product_edit)
 
+        // Khởi tạo các view
         etProductName = findViewById(R.id.etProductName)
         etProductDescription = findViewById(R.id.etProductDescription)
         etProductPrice = findViewById(R.id.etProductPrice)
-        etProductCategory = findViewById(R.id.etProductCategory)
+        spinnerProductCategory = findViewById(R.id.spinnerProductCategory)
         btnSelectImages = findViewById(R.id.btnSelectImages)
         btnUploadProduct = findViewById(R.id.btnUploadProduct)
         gvSelectedImages = findViewById(R.id.gvSelectedImages)
+        iconTypeAdd = findViewById(R.id.iconTypeAdd)
 
         imageAdapter = ImageAdapter(this, imageUris)
         gvSelectedImages.adapter = imageAdapter
@@ -48,11 +49,36 @@ class AddProductActivity : AppCompatActivity() {
         btnUploadProduct.setOnClickListener {
             uploadProduct()
         }
+
+        // Cài đặt danh sách các danh mục sản phẩm
+        val categories = arrayOf("Samsung", "Iphone", "Huewai", "Oppo")
+
+        // Tạo ArrayAdapter và gán vào Spinner
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerProductCategory.adapter = adapter
+
+        // Thiết lập sự kiện khi người dùng chọn mục trong Spinner
+        spinnerProductCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Thay đổi hình ảnh dựa trên mục đã chọn
+                when (position) {
+                    0 -> iconTypeAdd.setImageResource(R.drawable.image3)
+                    1 -> iconTypeAdd.setImageResource(R.drawable.image2)
+                    2 -> iconTypeAdd.setImageResource(R.drawable.image1)
+                    3 -> iconTypeAdd.setImageResource(R.drawable.op)
+                    else -> iconTypeAdd.setImageResource(R.drawable.info)  // Khác
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Nếu không có lựa chọn nào
+            }
+        }
     }
 
     private val selectImagesLauncher = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
         if (uris.isNotEmpty()) {
-            imageUris.clear()
             imageUris.addAll(uris)
             imageAdapter.notifyDataSetChanged()
             Toast.makeText(this, "Đã chọn ${imageUris.size} hình ảnh", Toast.LENGTH_SHORT).show()
@@ -67,7 +93,7 @@ class AddProductActivity : AppCompatActivity() {
         val name = etProductName.text.toString().trim()
         val description = etProductDescription.text.toString().trim()
         val priceText = etProductPrice.text.toString().trim()
-        val category = etProductCategory.text.toString().trim()
+        val category = spinnerProductCategory.selectedItem.toString().trim()
 
         if (name.isEmpty() || description.isEmpty() || priceText.isEmpty() || category.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
@@ -88,7 +114,7 @@ class AddProductActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance().reference
         val storage = FirebaseStorage.getInstance().reference
 
-        // Sử dụng push().key để tạo ID duy nhất
+        // Tạo ID duy nhất cho sản phẩm
         val productId = database.child("products").push().key
 
         if (productId == null) {
@@ -99,6 +125,7 @@ class AddProductActivity : AppCompatActivity() {
         val imageUrls = mutableListOf<String>()
         var uploadCount = 0
 
+        // Tải ảnh lên Firebase Storage
         for ((index, imageUri) in imageUris.withIndex()) {
             val imageRef = storage.child("products/$productId/image_$index.jpg")
             imageRef.putFile(imageUri)
@@ -108,17 +135,17 @@ class AddProductActivity : AppCompatActivity() {
                         uploadCount++
 
                         if (uploadCount == imageUris.size) {
-                            // Lưu sản phẩm vào database sau khi tất cả hình ảnh đã được tải lên
+                            // Lưu sản phẩm vào Firebase sau khi tất cả hình ảnh đã được tải lên
                             val product = Product(
                                 id = productId,
                                 name = name,
                                 price = price,
                                 category = category,
                                 description = description,
-                                imageUrl = imageUrls // Chắc chắn rằng đây là danh sách các URL
+                                imageUrl = imageUrls
                             )
 
-                            // Lưu sản phẩm vào Firebase
+                            // Lưu vào database
                             database.child("products").child(productId).setValue(product)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {
@@ -138,7 +165,4 @@ class AddProductActivity : AppCompatActivity() {
                 }
         }
     }
-
-
-
 }

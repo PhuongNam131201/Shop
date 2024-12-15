@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,14 +28,18 @@ class ManageProductActivity : AppCompatActivity() {
     private lateinit var productList: MutableList<Product>
     private lateinit var productAdapter: ProductAdapter
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var txtSumProduct: TextView // Khai báo TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_product)
 
+        // Khởi tạo các thành phần UI
         recyclerView = findViewById(R.id.recyclerViewProduct)
         recyclerView.layoutManager = GridLayoutManager(this, 2) // 2 cột
         productList = mutableListOf()
+
+        txtSumProduct = findViewById(R.id.txtSumProduct) // Khởi tạo TextView
 
         // Khởi tạo DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference("products")
@@ -43,12 +48,18 @@ class ManageProductActivity : AppCompatActivity() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 productList.clear()
+                var productCount = 0
+
                 for (productSnapshot in snapshot.children) {
                     val product = productSnapshot.getValue(Product::class.java)
                     product?.let {
                         productList.add(it)
+                        productCount++ // Tăng biến đếm mỗi khi có sản phẩm
                     }
                 }
+
+                // Cập nhật số lượng sản phẩm vào TextView
+                txtSumProduct.text = "Hiện có: $productCount SP"
 
                 // Kiểm tra xem danh sách sản phẩm có trống hay không
                 if (productList.isNotEmpty()) {
@@ -70,7 +81,7 @@ class ManageProductActivity : AppCompatActivity() {
         })
 
         // Chuyển đến màn hình thêm sản phẩm
-        val add = findViewById<TextView>(R.id.txtAdd)
+        val add = findViewById<ImageView>(R.id.txtAdd)
         add.setOnClickListener {
             val intent = Intent(this, AddProductActivity::class.java)
             startActivity(intent)
