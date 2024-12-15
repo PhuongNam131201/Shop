@@ -12,3 +12,4 @@ data class Product(
     // Constructor mặc định yêu cầu bởi Firebase
     constructor() : this("","", 0.0, "", "", ArrayList())
 }
+

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,12 +17,22 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.phuongnam19973.Adapter.ImageDetailAdapter
 import com.example.phuongnam19973.Adapter.SliderAdapter
 import com.example.phuongnam19973.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import java.text.DecimalFormat
 
 class ProductDetailActivity : AppCompatActivity() {
-
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     private lateinit var sliderAdapter: SliderAdapter
     private lateinit var imageDetailAdapter: ImageDetailAdapter
     private var isUserScrolling = false
@@ -29,6 +40,17 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
+        // Khởi tạo FirebaseAuth và Database
+        mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+
+        // Cấu hình Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        checkUserRole()
 
         // Nhận dữ liệu từ Intent
         val productId = intent.getStringExtra("productId")
@@ -136,4 +158,52 @@ class ProductDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Xóa sản phẩm thất bại: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
+    // Hàm kiểm tra quyền của người dùng từ Firebase Realtime Database
+    private fun checkUserRole() {
+        val currentUser = mAuth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            database.child("users").child(uid).child("role").addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val role = snapshot.getValue(String::class.java)
+                    when (role) {
+                        "admin" -> {
+                            enableAdminFeatures()
+                        }
+                        "user" -> {
+                            disableAdminFeatures()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                this@ProductDetailActivity,
+                                "Không xác định được quyền của bạn!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Firebase", "Lỗi khi lấy dữ liệu role: ${error.message}")
+                }
+            })
+        } else {
+            Log.e("FirebaseAuth", "Người dùng chưa đăng nhập!")
+        }
+    }
+
+    // Kích hoạt các tính năng cho admin
+    private fun enableAdminFeatures() {
+        findViewById<LinearLayout>(R.id.llMP).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.llUP).visibility = View.GONE
+    }
+
+    // Vô hiệu hóa các tính năng chỉ dành cho admin
+    private fun disableAdminFeatures() {
+        findViewById<LinearLayout>(R.id.llUP).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.llMP).visibility = View.GONE
+
+    }
+
 }
