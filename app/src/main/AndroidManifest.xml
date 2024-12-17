@@ -32,6 +32,8 @@
             android:exported="false"/>
         <activity android:name=".Activity.EditProductActivity"
             android:exported="false"/>
+        <activity android:name=".Activity.CartActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activity.SignIn"
             android:exported="true">

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.phuongnam19973.Adapter.ImageDetailAdapter
 import com.example.phuongnam19973.Adapter.SliderAdapter
+import com.example.phuongnam19973.Model.CartItem
+import com.example.phuongnam19973.Model.Product
 import com.example.phuongnam19973.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -53,11 +55,11 @@ class ProductDetailActivity : AppCompatActivity() {
         checkUserRole()
 
         // Nhận dữ liệu từ Intent
-        val productId = intent.getStringExtra("productId")
-        val productName = intent.getStringExtra("productName")
+        val productId = intent.getStringExtra("productId")?: return
+        val productName = intent.getStringExtra("productName") ?: ""
         val productPrice = intent.getDoubleExtra("productPrice", 0.0)
-        val productDescription = intent.getStringExtra("productDescription")
-        val productImages = intent.getStringArrayListExtra("productImages")
+        val productDescription = intent.getStringExtra("productDescription")?: ""
+        val productImages = intent.getStringArrayListExtra("productImages")?: arrayListOf()
         val productCategory = intent.getStringArrayListExtra("productCategory")
 
         // Ánh xạ các view
@@ -69,6 +71,27 @@ class ProductDetailActivity : AppCompatActivity() {
         val colorList: RecyclerView = findViewById(R.id.colorList)
         val btnDelete: ImageView = findViewById(R.id.btnDelete)
         val btnEdit: ImageView = findViewById(R.id.btnEdit)
+        val btnAddToCart: Button = findViewById(R.id.btnAddToCart)
+        val btnBuyNow: Button = findViewById(R.id.btnBuyNow)
+        // Khi nhấn "Thêm vào giỏ hàng"
+        btnAddToCart.setOnClickListener {
+            val userId = mAuth.currentUser?.uid ?: return@setOnClickListener
+            val product = Product(
+                id = productId,
+                name = productName,
+                price = productPrice,
+                description = productDescription,
+                imageUrl = productImages
+            )
+            addToCart(userId, product, 1) // Thêm 1 sản phẩm
+            Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Khi nhấn "Mua hàng"
+        btnBuyNow.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
         // Gán dữ liệu vào TextView
         txtNameDetail.text = productName
         Log.d("ProductDetail", "Product Price: $productPrice")
@@ -131,6 +154,28 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
     }
+    fun addToCart(userId: String, product: Product, quantity: Int) {
+        val cartRef = FirebaseDatabase.getInstance().getReference("carts").child(userId)
+
+        cartRef.child(product.id).get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val currentQuantity = snapshot.child("quantity").getValue(Int::class.java) ?: 0
+                cartRef.child(product.id).child("quantity").setValue(currentQuantity + quantity)
+            } else {
+                val cartItem = CartItem(
+                    id = product.id,
+                    name = product.name,
+                    price = product.price,
+                    quantity = quantity,
+                    imageUrl = product.imageUrl.firstOrNull() ?: ""
+                )
+                cartRef.child(product.id).setValue(cartItem)
+            }
+        }.addOnFailureListener {
+            Log.e("CartError", "Failed to add product: ${it.message}")
+        }
+    }
+
     private fun showDeleteConfirmationDialog(productId: String) {
         // Tạo và hiển thị hộp thoại xác nhận
         val alertDialog = AlertDialog.Builder(this)

@@ -1,0 +1,238 @@
+<LinearLayout android:id="@+id/llItemIcon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/llicon_oppo"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_oppo" />
+
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Oppo"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llicon_huawei"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_huawei" />
+
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Huewei"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llicon_iphone"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_iphone" />
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Iphone"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llicon_samsung"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage10"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_samsung" />
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Samsung"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/llicon_realme"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage11"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_realme" />
+
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Realme"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llicon_hp"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage12"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_hp" />
+
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Hp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llicon_dell"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp"
+            >
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage14"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_dell" />
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Dell"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llicon_vivo"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Icon ứng dụng -->
+            <ImageView
+                android:id="@+id/iconImage20"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_vivo" />
+            <!-- Tên ứng dụng -->
+            <TextView
+                android:id="@+id/iconName20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Vivo"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

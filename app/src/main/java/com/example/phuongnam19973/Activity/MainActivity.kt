@@ -65,6 +65,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ManageActivity::class.java)
             startActivity(intent)
         }
+        val cart = findViewById<LinearLayout>(R.id.llCart)
+        cart.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+        val bottomcart = findViewById<LinearLayout>(R.id.bottomCart)
+        bottomcart.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Hàm kiểm tra quyền của người dùng từ Firebase Realtime Database
