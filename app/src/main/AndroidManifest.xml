@@ -41,6 +41,10 @@
             android:exported="false"/>
         <activity android:name=".Activity.OrdersActivity"
             android:exported="false"/>
+        <activity android:name=".Activity.OrderDetailsActivity"
+            android:exported="false"/>
+        <activity android:name=".Activity.OrderAminActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activity.SignIn"
             android:exported="true">

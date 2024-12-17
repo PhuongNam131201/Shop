@@ -4,7 +4,8 @@
     android:layout_height="140dp"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="@drawable/edit_text_background">
+    android:background="@drawable/edit_text_bg_whiteblack"
+    android:layout_marginTop="5dp">
 
     <!-- Image of the product -->
     <ImageView

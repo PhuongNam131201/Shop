@@ -1,28 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/edit_text_bg_whiteblack"
+    android:layout_marginTop="5dp">
 
+    <!-- Thông tin sản phẩm: hình ảnh và tên -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/productImageOrder"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/box" /> <!-- Placeholder hình ảnh -->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Tên sản phẩm -->
+            <TextView
+                android:id="@+id/productNameOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sản phẩm"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <!-- Giá tiền của sản phẩm -->
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200.000 VND"
+                android:textSize="14sp"
+                android:textColor="#FF5722"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tổng tiền của đơn hàng -->
     <TextView
         android:id="@+id/orderTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tổng tiền"
+        android:text="Tổng tiền: 57.520"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
+    <!-- Địa chỉ giao hàng -->
     <TextView
         android:id="@+id/orderAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Địa chỉ" />
+        android:text="Địa chỉ: Số 123, ABC, Hà Nội"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
 
+    <!-- Trạng thái đơn hàng -->
     <TextView
         android:id="@+id/orderStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Trạng thái"
-        android:textStyle="italic"/>
+        android:text="Trạng thái: Đang vận chuyển"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Thời gian dán bảo nhận hàng -->
+    <TextView
+        android:id="@+id/deliveryTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thời gian dán bảo nhận hàng: 25 Th12 - 30 Th12"
+        android:textSize="14sp"
+        android:textColor="#388E3C"
+        android:layout_marginTop="8dp"/>
 </LinearLayout>

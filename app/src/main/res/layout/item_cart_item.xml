@@ -1,0 +1,67 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/edit_text_bg_whiteblack"
+    android:gravity="center_vertical"
+    android:layout_marginTop="10dp">
+
+    <!-- Hình ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/itemImageOrderDetail"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/box" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <!-- Tên sản phẩm -->
+        <TextView
+            android:id="@+id/itemNameOrderDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên món"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="#333333" />
+
+        <!-- Giá sản phẩm -->
+        <TextView
+            android:id="@+id/itemPriceOrderDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giá: 1.000 VND"
+            android:textSize="14sp"
+            android:textColor="#f44336"
+            android:layout_marginTop="4dp" />
+
+        <!-- Số lượng -->
+        <TextView
+            android:id="@+id/itemQuantityOrderDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x50"
+            android:textSize="14sp"
+            android:textColor="#757575"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Nút cho tổng giá -->
+    <TextView
+        android:id="@+id/itemTotalPriceOrderDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.000 VND"
+        android:textSize="14sp"
+        android:textColor="#f44336"
+        android:layout_marginStart="8dp" />
+</LinearLayout>

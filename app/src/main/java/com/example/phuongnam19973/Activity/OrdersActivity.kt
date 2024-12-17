@@ -21,7 +21,6 @@ class OrdersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
-
         ordersRecyclerView = findViewById(R.id.ordersRecyclerView)
         ordersRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,7 +42,6 @@ class OrdersActivity : AppCompatActivity() {
                     ordersAdapter = OrdersAdapter(ordersList)
                     ordersRecyclerView.adapter = ordersAdapter
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(this@OrdersActivity, "Lỗi khi tải đơn hàng", Toast.LENGTH_SHORT).show()
                 }

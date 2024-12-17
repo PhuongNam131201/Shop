@@ -197,6 +197,7 @@ class CartActivity : AppCompatActivity() {
         orderRef.setValue(order).addOnSuccessListener {
             Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,OrderWaitingActivity::class.java)
+            intent.putExtra("totalAmount", totalAmount)
             startActivity(intent)
             clearCart()
 

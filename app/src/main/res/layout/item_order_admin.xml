@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    >
+
+    <!-- Hiển thị tên người đặt -->
+    <TextView
+        android:id="@+id/txtUserNameAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên người đặt"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Hiển thị tổng tiền đơn hàng -->
+    <TextView
+        android:id="@+id/txtTotalAmountAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tổng tiền: 0 VND"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Hiển thị trạng thái đơn hàng -->
+    <TextView
+        android:id="@+id/txtStatusAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trạng thái: Chờ xác nhận"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_orange_dark"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Các nút xác nhận và huỷ -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnConfirmadmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Xác nhận"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnCanceladmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Huỷ"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+</LinearLayout>

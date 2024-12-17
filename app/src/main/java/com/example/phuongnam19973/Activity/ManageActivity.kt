@@ -97,5 +97,10 @@ class ManageActivity: AppCompatActivity() {
             val intent = Intent(this,ManageProductActivity::class.java)
             startActivity(intent)
         }
+        val cart = findViewById<LinearLayout>(R.id.llCartManage)
+        cart.setOnClickListener{
+            val intent = Intent(this,OrderAminActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
