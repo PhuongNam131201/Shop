@@ -56,12 +56,12 @@
                     android:src="@drawable/message" />
 
                 <ImageView
-                    android:id="@+id/settingsIcon"
+                    android:id="@+id/odersIcon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_toStartOf="@id/notificationIcon"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/bell" />
+                    android:src="@drawable/order" />
             </RelativeLayout>
 
 

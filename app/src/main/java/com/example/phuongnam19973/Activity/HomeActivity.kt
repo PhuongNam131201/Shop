@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -119,6 +120,11 @@ class HomeActivity : AppCompatActivity() {
         val cart = findViewById<LinearLayout>(R.id.llCartHome)
         cart.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+        val order = findViewById<ImageView>(R.id.odersIcon)
+        order.setOnClickListener{
+            val intent = Intent(this, OrdersActivity::class.java)
             startActivity(intent)
         }
     }

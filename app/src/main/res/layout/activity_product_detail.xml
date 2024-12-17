@@ -77,7 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
-
                 android:orientation="horizontal">
 
                 <TextView
@@ -185,7 +184,7 @@
             android:id="@+id/btnBuyNow"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Mua ngay"
+            android:text="Giỏ hàng"
             android:layout_weight="1"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_bg_red"

@@ -66,6 +66,4 @@
             android:textColor="@color/white"
             android:background="@drawable/button_bg_red"/>
     </LinearLayout>
-
-
 </LinearLayout>
