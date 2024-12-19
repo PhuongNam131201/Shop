@@ -43,8 +43,13 @@
             android:exported="false"/>
         <activity android:name=".Activity.OrderDetailsActivity"
             android:exported="false"/>
-        <activity android:name=".Activity.OrderAminActivity"
+        <activity android:name=".Activity.OrderAdminActivity"
             android:exported="false"/>
+        <activity android:name=".Activity.ChatActivity"
+            android:exported="false"/>
+        <activity android:name=".Activity.StatisticsActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activity.SignIn"
             android:exported="true">

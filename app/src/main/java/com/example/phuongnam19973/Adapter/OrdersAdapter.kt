@@ -14,6 +14,8 @@ import com.example.phuongnam19973.R
 import java.text.NumberFormat
 import java.util.Locale
 import java.util.*
+import android.content.Context
+@Suppress("DEPRECATION")
 class OrdersAdapter(private val orders: List<Order>) : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {
 
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -54,6 +56,7 @@ class OrdersAdapter(private val orders: List<Order>) : RecyclerView.Adapter<Orde
 
         holder.orderAddress.text = "Địa chỉ: ${order.address}"
         holder.orderStatus.text = "Trạng thái: ${order.status}"
+
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context

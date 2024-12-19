@@ -1,63 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    >
+    android:background="@drawable/edit_text_bg_whiteblack"
+    android:layout_marginTop="5dp">
 
-    <!-- Hiển thị tên người đặt -->
+    <!-- Thông tin sản phẩm: hình ảnh và tên -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/profile" /> <!-- Placeholder hình ảnh -->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Tên sản phẩm -->
+            <TextView
+                android:id="@+id/userNameOrderAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Người dùng"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/orderTotalAdmian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng tiền:"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/orderTotalAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="57.520"
+                    android:textSize="16sp"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tổng tiền của đơn hàng -->
+
+
+    <!-- Địa chỉ giao hàng -->
     <TextView
-        android:id="@+id/txtUserNameAdmin"
+        android:id="@+id/orderAddressAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tên người đặt"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginTop="8dp"
+        android:text="Địa chỉ: Số 123, ABC, Hà Nội"
+        android:textSize="14sp" />
 
-    <!-- Hiển thị tổng tiền đơn hàng -->
-    <TextView
-        android:id="@+id/txtTotalAmountAdmin"
-        android:layout_width="wrap_content"
+    <!-- Trạng thái đơn hàng -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tổng tiền: 0 VND"
-        android:textSize="14sp"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/orderStatusAdminaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái: "
+            android:textSize="18sp"
+            android:textStyle="italic"
+           />
 
-    <!-- Hiển thị trạng thái đơn hàng -->
-    <TextView
-        android:id="@+id/txtStatusAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trạng thái: Chờ xác nhận"
-        android:textSize="14sp"
-        android:textColor="@android:color/holo_orange_dark"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            android:id="@+id/orderStatusAdmin"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:text="Chờ xác nhận"
+            android:textStyle="italic"
+            android:textColor="@color/blue"/>
 
-    <!-- Các nút xác nhận và huỷ -->
+    </LinearLayout>
+
+
+    <!-- Thời gian dán bảo nhận hàng -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end">
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
 
-        <Button
-            android:id="@+id/btnConfirmadmin"
+        <LinearLayout
+            android:id="@+id/llXacNhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Xác nhận"
-            android:visibility="visible" />
+            android:orientation="vertical"
+            android:layout_marginRight="30dp">
 
-        <Button
-            android:id="@+id/btnCanceladmin"
+            <ImageView
+                android:id="@+id/btnConfirmadmin"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pressbutton"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xác nhận"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/green"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llHuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Huỷ"
-            android:visibility="visible" />
+            android:orientation="vertical"
+            android:layout_marginRight="30dp">
 
+            <ImageView
+                android:id="@+id/btnCanceladmin"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/document"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huỷ"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnDeleteAdmin"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/delete"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xoá"
+                android:textColor="@color/red"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                />
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

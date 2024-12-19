@@ -67,7 +67,8 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.9.1")
     implementation("com.tbuonomo:dotsindicator:5.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
-
+    implementation ("net.objecthunter:exp4j:0.4.8")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
 
 

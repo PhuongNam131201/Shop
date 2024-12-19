@@ -26,7 +26,19 @@ class OrderDetailsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvOrderDetailStatus).text = "${order?.status}"
         val formattedTotalAmount = formatPrice(order?.totalAmount ?: 0.0)
         findViewById<TextView>(R.id.tvOrderDetailTotalAmount).text = "$formattedTotalAmount VND"
-
+        val statusTextView = findViewById<TextView>(R.id.tvOrderDetailStatus) // Lấy TextView của status
+        when (order?.status) {
+            "Chờ xác nhận" -> {
+                statusTextView.setTextColor(resources.getColor(R.color.blue))
+            } // Màu cho "Chờ xác nhận"
+            "Đã xác nhận" -> {
+                statusTextView.setTextColor(resources.getColor(R.color.green))
+            } // Màu cho "Đã xác nhận"
+            "Đã huỷ" -> {
+                statusTextView.setTextColor(resources.getColor(R.color.orange))
+            } // Màu cho "Đã huỷ"
+            else -> statusTextView.setTextColor(resources.getColor(R.color.blue)) // Màu mặc định
+        }
         // Hiển thị danh sách các món
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewOrderItems)
         recyclerView.layoutManager = LinearLayoutManager(this)

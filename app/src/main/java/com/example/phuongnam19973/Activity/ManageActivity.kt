@@ -13,14 +13,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ManageActivity: AppCompatActivity() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var txtTongSP: TextView
+    private lateinit var txtTongNguoiDung: TextView
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,12 @@ class ManageActivity: AppCompatActivity() {
         val user = auth.currentUser
         val name = findViewById<TextView>(R.id.txtNamManage)
         val role = findViewById<TextView>(R.id.txtRoleManage)
+        txtTongSP = findViewById(R.id.txtTongSP)  // Giả sử bạn đã thêm ID txtTongSP vào layout
+        txtTongNguoiDung = findViewById(R.id.txtTongNguoiDung)
+        getProductCount()
+
+        // Lấy tổng số người dùng từ Firebase Realtime Database
+        getUserCount()
         // Kiểm tra nếu người dùng đã đăng nhập
         if (user != null) {
             // Lấy userId từ FirebaseAuth
@@ -99,8 +110,38 @@ class ManageActivity: AppCompatActivity() {
         }
         val cart = findViewById<LinearLayout>(R.id.llCartManage)
         cart.setOnClickListener{
-            val intent = Intent(this,OrderAminActivity::class.java)
+            val intent = Intent(this,OrderAdminActivity::class.java)
             startActivity(intent)
         }
+    }
+    private fun getProductCount() {
+        val productsRef = database.child("products")
+        productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Đếm số lượng sản phẩm
+                val productCount = snapshot.childrenCount
+                txtTongSP.text = "$productCount"
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
+    }
+
+    // Lấy tổng số người dùng trong Firebase
+    private fun getUserCount() {
+        val usersRef = database.child("users")
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Đếm số lượng người dùng
+                val userCount = snapshot.childrenCount
+                txtTongNguoiDung.text = "$userCount"
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 }
