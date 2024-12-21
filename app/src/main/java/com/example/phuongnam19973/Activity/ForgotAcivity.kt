@@ -55,7 +55,7 @@ class ForgotAcivity : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     val errorMessage = task.exception?.message
-                    Toast.makeText(this, "Lỗi: $errorMessage", Toast.LENGTH_LONG).show()
+
                 }
             }
     }

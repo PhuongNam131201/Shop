@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.NumberFormat
+import java.util.Locale
 
 class ManageActivity: AppCompatActivity() {
 
@@ -26,6 +28,8 @@ class ManageActivity: AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var txtTongSP: TextView
     private lateinit var txtTongNguoiDung: TextView
+    private lateinit var txtTongDoanhThu: TextView
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +49,14 @@ class ManageActivity: AppCompatActivity() {
         val role = findViewById<TextView>(R.id.txtRoleManage)
         txtTongSP = findViewById(R.id.txtTongSP)  // Giả sử bạn đã thêm ID txtTongSP vào layout
         txtTongNguoiDung = findViewById(R.id.txtTongNguoiDung)
+        txtTongDoanhThu = findViewById(R.id.txtTongDoanhThu)
+
         getProductCount()
 
         // Lấy tổng số người dùng từ Firebase Realtime Database
         getUserCount()
+        getOrderRevenue()
+
         // Kiểm tra nếu người dùng đã đăng nhập
         if (user != null) {
             // Lấy userId từ FirebaseAuth
@@ -113,6 +121,11 @@ class ManageActivity: AppCompatActivity() {
             val intent = Intent(this,OrderAdminActivity::class.java)
             startActivity(intent)
         }
+        val dv = findViewById<LinearLayout>(R.id.llServiceManager)
+        dv.setOnClickListener{
+            val intent = Intent(this,BannerAdminActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun getProductCount() {
         val productsRef = database.child("products")
@@ -144,4 +157,31 @@ class ManageActivity: AppCompatActivity() {
             }
         })
     }
+    private fun getOrderRevenue() {
+        val ordersRef = database.child("orders")
+        ordersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var totalRevenue = 0.0
+                for (orderSnapshot in snapshot.children) {
+                    val itemsSnapshot = orderSnapshot.child("items")
+                    for (itemSnapshot in itemsSnapshot.children) {
+                        val itemPrice = itemSnapshot.child("price").getValue(Double::class.java) ?: 0.0
+                        val itemQuantity = itemSnapshot.child("quantity").getValue(Int::class.java) ?: 0
+                        totalRevenue += itemPrice * itemQuantity
+                    }
+                }
+                txtTongDoanhThu.text = "${formatPrice(totalRevenue)} VND"
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                txtTongDoanhThu.text = "Không thể lấy tổng doanh thu"
+            }
+        })
+    }
+    private fun formatPrice(price: Double): String {
+        val locale = Locale("vi", "VN")  // Cài đặt locale cho Việt Nam
+        val numberFormat = NumberFormat.getInstance(locale)
+        return numberFormat.format(price)
+    }
+
 }

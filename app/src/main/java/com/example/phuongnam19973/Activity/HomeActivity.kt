@@ -127,6 +127,11 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, OrdersActivity::class.java)
             startActivity(intent)
         }
+        val notification = findViewById<ImageView>(R.id.notificationIcon)
+        notification.setOnClickListener{
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun fetchBannerData() {
         // Lấy dữ liệu từ Firebase

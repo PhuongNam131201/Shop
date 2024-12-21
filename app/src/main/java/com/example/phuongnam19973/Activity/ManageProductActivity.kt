@@ -76,7 +76,7 @@ class ManageProductActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
                 // Xử lý lỗi nếu có
-                Toast.makeText(this@ManageProductActivity, "Lỗi tải dữ liệu", Toast.LENGTH_SHORT).show()
+
             }
         })
 

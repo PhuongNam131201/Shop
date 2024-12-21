@@ -30,7 +30,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="GIAO DIỆN CHATBOX" />
+            android:text="GIAO DIỆN CHATBOT" />
 
         <ImageView
             android:id="@+id/imageView11"

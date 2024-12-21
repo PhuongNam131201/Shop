@@ -43,7 +43,7 @@ class OrdersActivity : AppCompatActivity() {
                     ordersRecyclerView.adapter = ordersAdapter
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@OrdersActivity, "Lỗi khi tải đơn hàng", Toast.LENGTH_SHORT).show()
+
                 }
             })
     }

@@ -33,7 +33,7 @@ class OrderWaitingActivity : AppCompatActivity() {
 
         val home = findViewById<Button>(R.id.homeButtonWaiting)
         home.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

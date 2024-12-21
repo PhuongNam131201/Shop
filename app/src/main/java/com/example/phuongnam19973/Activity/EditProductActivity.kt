@@ -103,7 +103,7 @@ class EditProductActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@EditProductActivity, "Lỗi: ${error.message}", Toast.LENGTH_SHORT).show()
+
             }
         })
     }
@@ -145,7 +145,7 @@ class EditProductActivity : AppCompatActivity() {
         databaseReference.child(productId).updateChildren(updates).addOnSuccessListener {
             uploadImages(productId)
         }.addOnFailureListener {
-            Toast.makeText(this, "Lỗi cập nhật sản phẩm: ${it.message}", Toast.LENGTH_SHORT).show()
+
         }
     }
 

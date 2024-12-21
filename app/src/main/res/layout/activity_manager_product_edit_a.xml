@@ -198,7 +198,7 @@
             android:id="@+id/btnUploadProducta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thêm sản phẩm"
+            android:text="Sửa sản phẩm"
             android:background="@drawable/button_bg_blue"
             android:textColor="@android:color/white"
             android:textSize="16sp"

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phuongnam19973.Adapter.CartAdapter
 import com.example.phuongnam19973.Model.CartItem
+import com.example.phuongnam19973.Model.Notification
 import com.example.phuongnam19973.Model.Order
 import com.example.phuongnam19973.R
 import com.google.android.gms.location.LocationServices
@@ -77,7 +78,7 @@ class CartActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@CartActivity, "Không thể tải giỏ hàng!", Toast.LENGTH_SHORT).show()
+
             }
         })
     }
@@ -180,29 +181,64 @@ class CartActivity : AppCompatActivity() {
             mainLooper
         )
     }
-    private fun saveOrderToDatabase(address: String, phone: String, content:String) {
+    // Lưu đơn hàng vào Firebase với ID tự động
+    private fun saveOrderToDatabase(address: String, phone: String, content: String) {
         if (userId == null) return
 
         val totalAmount = cartItems.sumOf { it.price * it.quantity }
         val order = Order(
             userId = userId,
             items = cartItems,
-            content=    content,
+            content = content,
             totalAmount = totalAmount,
             address = address,
-            phoneNumber = phone
+            phoneNumber = phone,
+            status = "Chờ xác nhận"  // Bạn có thể thay đổi status nếu cần
         )
 
-        val orderRef = database.child("orders").push()
-        orderRef.setValue(order).addOnSuccessListener {
-            Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,OrderWaitingActivity::class.java)
+        // Tạo ID tự động cho đơn hàng bằng phương thức push()
+        val orderRef = database.child("orders").push()  // Tạo ID tự động
+        val orderId = orderRef.key  // Lấy ID tự động được tạo ra
+
+        // Cập nhật ID vào đối tượng Order
+        val orderWithId = order.copy(id = orderId ?: "")
+
+        // Lưu đơn hàng vào Firebase
+        orderRef.setValue(orderWithId).addOnSuccessListener {
+            // Tạo thông báo với timestamp và userId
+            val notification = Notification(
+                message = "Đơn hàng của bạn đã được đặt thành công với tổng tiền: ${formatPrice(totalAmount)}",
+                userId = userId,
+                timestamp = System.currentTimeMillis()  // Gán timestamp là thời gian hiện tại
+            )
+
+            // Lưu thông báo vào Firebase dưới nhánh "notifications"
+            // Lưu trực tiếp vào "notifications" mà không phân nhánh theo userId
+            database.child("notifications")
+                .push()  // Tạo ID tự động cho thông báo
+                .setValue(notification)
+
+            // Hiển thị Toast cho người dùng
+            Toast.makeText(this, "Đặt hàng thành công, vui lòng kiểm tra đơn mua và thông báo!", Toast.LENGTH_SHORT).show()
+
+            // Chuyển sang Activity khác
+            val intent = Intent(this, OrderWaitingActivity::class.java)
             intent.putExtra("totalAmount", totalAmount)
             startActivity(intent)
+
+            // Xóa giỏ hàng
             clearCart()
 
         }.addOnFailureListener {
             Toast.makeText(this, "Lỗi khi đặt hàng!", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun formatPrice(price: Double): String {
+        val locale = Locale("vi", "VN")  // Cài đặt locale cho Việt Nam
+        val numberFormat = NumberFormat.getInstance(locale)
+        return numberFormat.format(price)
+    }
+
+
 }

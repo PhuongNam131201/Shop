@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                app:srcCompat="@drawable/backblue" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="GIAO DIỆN QUẢN LÝ BANNER" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DS banner hiện có"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerBannerAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#f5f5f5"/>
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tác vụ"
+            android:gravity="center"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID của banner"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <!-- Nhập ID -->
+        <EditText
+            android:id="@+id/edtBannerIdAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập ID banner"
+            android:layout_marginBottom="10dp"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp" />
+
+        <!-- Chọn ảnh -->
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnSelectImageAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn Ảnh"
+            android:backgroundTint="@color/blue"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp" />
+        <ImageView
+            android:id="@+id/imgPreviewBanner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Image Preview"
+            android:src="@drawable/banner1"/>
+        <!-- Thêm banner -->
+        <Button
+            android:id="@+id/btnAddBannerAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm Banner"
+            android:backgroundTint="@color/blue"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp" />
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hãy chắc rằng bạn đã nhập id cần xoá"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <!-- Xóa banner -->
+        <Button
+            android:id="@+id/btnDeleteBannerAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xóa Banner"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Danh sách banner -->
+
+
+    </LinearLayout>
+</ScrollView>

@@ -122,6 +122,31 @@ object BotResponse {
                     else -> "Lỗi"
                 }
             }
+            message.contains("giá thay vỏ samsung m35") -> {
+                when (random) {
+                    0 -> "Giá thay vỏ samsung m35 hiện tại là 99.999 VND ạ!"
+                    1 -> "Giá thay vỏ samsung m35 hiện tại là 99.999 VND! Bạn có thể tham khảo trong của hàng của tôi!"
+                    2 -> "Giá thay vỏ samsung m35 hiện tại là 99.999 VND! Cam kết sản phẩm chất lượng, giá cả hợp lí."
+                    else -> "Lỗi"
+                }
+            }
+            message.contains("giá") -> {
+                when (random) {
+                    0 -> "Bạn có thể cho mình biết sản phẩm cụ thể để mình đưa giá nhé!!!"
+                    1 -> "Bạn muốn xem giá của sản phẩm nào ạ!"
+                    2 -> "Bạn muốn xem giá của sản phẩm nào ạ!"
+                    else -> "Lỗi"
+                }
+            }
+            message.contains("hôm nay doanh thu thế nào") -> {
+                when (random) {
+                    0 -> "Hôm nay doanh thu không tệ!!!"
+                    1 -> "Hôm nay doanh thu được trên 500.000 VND!!!"
+                    2 -> "Hôm nay doanh thu gần 2.000.000 VND!!!"
+                    else -> "Lỗi"
+                }
+            }
+
 
             // Trường hợp gây lỗi nhưng xử lý bằng try-catch
             message.contains("gây lỗi") -> {
